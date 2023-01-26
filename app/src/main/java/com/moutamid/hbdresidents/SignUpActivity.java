@@ -17,6 +17,7 @@ import com.moutamid.hbdresidents.databinding.ActivitySignUpBinding;
 import com.moutamid.hbdresidents.models.UserModel;
 import com.moutamid.hbdresidents.utilis.Constants;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -106,6 +107,10 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private boolean valid() {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy");
+        Date date = new Date();
+        String d = format.format(date);
+        Toast.makeText(this, d, Toast.LENGTH_SHORT).show();
         if (binding.name.getEditText().getText().toString().isEmpty()) {
             binding.name.getEditText().setError("Name is Required");
             return false;
@@ -115,17 +120,32 @@ public class SignUpActivity extends AppCompatActivity {
         } if (binding.date.getEditText().getText().toString().isEmpty()){
             binding.date.getEditText().setError("Date is Required");
             return false;
-        } if (Integer.parseInt(binding.date.getEditText().getText().toString()) > 31 || Integer.parseInt(binding.date.getEditText().getText().toString()) == 0){
+        } if (Integer.parseInt(binding.date.getEditText().getText().toString()) > 31){
+            binding.date.getEditText().setError("Date is not valid");
+            return false;
+        }  if (Integer.parseInt(binding.date.getEditText().getText().toString()) < 1){
             binding.date.getEditText().setError("Date is not valid");
             return false;
         } if (binding.month.getEditText().getText().toString().isEmpty()){
             binding.month.getEditText().setError("Month is Required");
             return false;
-        } if (Integer.parseInt(binding.month.getEditText().getText().toString()) > 12 || Integer.parseInt(binding.date.getEditText().getText().toString()) == 0){
+        } if (Integer.parseInt(binding.month.getEditText().getText().toString()) > 12){
+            binding.month.getEditText().setError("Month is not valid");
+            return false;
+        } if (Integer.parseInt(binding.month.getEditText().getText().toString()) < 1){
             binding.month.getEditText().setError("Month is not valid");
             return false;
         } if (binding.year.getEditText().getText().toString().isEmpty()){
             binding.year.getEditText().setError("Year is Required");
+            return false;
+        } if (binding.year.getEditText().getText().toString().length() < 4){
+            binding.year.getEditText().setError("Year is not Valid");
+            return false;
+        } if (Integer.parseInt(binding.year.getEditText().getText().toString()) > Integer.parseInt(d)) {
+            binding.year.getEditText().setError("Year is not Valid");
+            return false;
+        } if (Integer.parseInt(binding.year.getEditText().getText().toString()) < 1) {
+            binding.year.getEditText().setError("Year is not Valid");
             return false;
         } if (binding.email.getEditText().getText().toString().isEmpty()){
             binding.email.getEditText().setError("Email is Required");
