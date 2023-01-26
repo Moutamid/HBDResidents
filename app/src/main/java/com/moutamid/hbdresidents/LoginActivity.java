@@ -28,6 +28,10 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(new Intent(this, SignUpActivity.class));
         });
 
+        binding.forgot.setOnClickListener(v -> {
+            startActivity(new Intent(this, ForgetPasswordActivity.class));
+        });
+
         binding.login.setOnClickListener(v -> {
             if (valid()) {
                 progressDialog.show();
