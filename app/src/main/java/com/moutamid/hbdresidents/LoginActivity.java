@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
                     finish();
                 }).addOnFailureListener(e -> {
                     progressDialog.dismiss();
-                    Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                 });
             }
         });
