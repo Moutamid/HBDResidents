@@ -110,7 +110,6 @@ public class SignUpActivity extends AppCompatActivity {
         SimpleDateFormat format = new SimpleDateFormat("yyyy");
         Date date = new Date();
         String d = format.format(date);
-        Toast.makeText(this, d, Toast.LENGTH_SHORT).show();
         if (binding.name.getEditText().getText().toString().isEmpty()) {
             binding.name.getEditText().setError("Name is Required");
             return false;
