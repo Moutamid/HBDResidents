@@ -2,6 +2,7 @@ package com.moutamid.hbdresidents;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.widget.Toast;
@@ -34,4 +35,11 @@ public class ForgetPasswordActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(ForgetPasswordActivity.this, MainActivity.class));
+        finish();
+    }
+
 }

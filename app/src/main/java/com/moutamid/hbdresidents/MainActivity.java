@@ -21,10 +21,12 @@ public class MainActivity extends AppCompatActivity {
 
         binding.signup.setOnClickListener(v -> {
             startActivity(new Intent(this, SignUpActivity.class));
+            finish();
         });
 
         binding.login.setOnClickListener(v -> {
             startActivity(new Intent(this, LoginActivity.class));
+            finish();
         });
 
         piano.start();

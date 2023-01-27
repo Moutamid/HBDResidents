@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">#FE5F55</color>
-    <color name="secondary">#FF03DAC5</color>
+    <color name="primary">#38B6FF</color>
+   <!-- <color name="primary">#FE5F55</color>-->
+    <color name="secondary">#FE5F55</color>
     <color name="beige">#EEF5DB</color>
     <color name="grey">#EBEBEB</color>
     <color name="dark">#4F6367</color>

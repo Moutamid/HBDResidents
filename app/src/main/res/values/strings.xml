@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">HBDResidents</string>
-    <string name="login">Already Have an Account? <font color="#FE5F55"><b>Login</b></font></string>
+    <string name="login">Already Have an Account? <font color="#38B6FF"><b>Login</b></font></string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -180,4 +180,10 @@ public class SignUpActivity extends AppCompatActivity {
             Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show();
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(SignUpActivity.this, MainActivity.class));
+        finish();
+    }
 }
