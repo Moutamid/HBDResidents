@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">HBDResidents</string>
+    <string name="app_name">HBD Residents</string>
     <string name="login">Already Have an Account? <font color="#38B6FF"><b>Login</b></font></string>
-
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
