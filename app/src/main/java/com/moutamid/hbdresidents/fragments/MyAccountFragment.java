@@ -30,6 +30,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.moutamid.hbdresidents.EditProfileActivity;
+import com.moutamid.hbdresidents.MapsActivity;
 import com.moutamid.hbdresidents.R;
 import com.moutamid.hbdresidents.SplashScreenActivity;
 import com.moutamid.hbdresidents.databinding.FragmentMyAccountBinding;
@@ -62,6 +63,10 @@ public class MyAccountFragment extends Fragment {
 
         binding.delete.setOnClickListener(v -> {
             deleteUser();
+        });
+
+        binding.viewMap.setOnClickListener(v -> {
+            startActivity(new Intent(context, MapsActivity.class));
         });
 
         Constants.databaseReference().child("users").child(Constants.auth().getCurrentUser().getUid())
