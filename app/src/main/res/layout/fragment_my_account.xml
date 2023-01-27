@@ -72,6 +72,7 @@
                     android:orientation="vertical">
 
                     <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/editProfile"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:cardElevation="0sp"
@@ -186,7 +187,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="start|center"
-                                android:text="About Developer"
+                                android:text="Contact Developer"
                                 android:layout_weight="1"
                                 android:textColor="@color/black"
                                 android:fontFamily="@font/poppins"
@@ -258,6 +259,7 @@
                     android:orientation="vertical">
 
                     <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/logout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:cardElevation="0sp"
@@ -291,6 +293,7 @@
                     </com.google.android.material.card.MaterialCardView>
 
                     <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/delete"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:cardElevation="0sp"
