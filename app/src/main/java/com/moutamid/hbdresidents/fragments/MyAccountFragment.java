@@ -55,7 +55,7 @@ public class MyAccountFragment extends Fragment {
             startActivity(new Intent(context, EditProfileActivity.class));
         });
 
-        binding.logout.setOnClickListener(v->{
+        binding.logout.setOnClickListener(v-> {
             Constants.auth().signOut();
             startActivity(new Intent(context, SplashScreenActivity.class));
             getActivity().finish();
