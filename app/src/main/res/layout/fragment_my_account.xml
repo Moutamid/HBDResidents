@@ -139,6 +139,7 @@
                     </com.google.android.material.card.MaterialCardView>
 
                     <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/aboutUs"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:cardElevation="0sp"
@@ -172,6 +173,7 @@
                     </com.google.android.material.card.MaterialCardView>
 
                     <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/developer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:cardElevation="0sp"

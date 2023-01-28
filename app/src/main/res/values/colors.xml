@@ -11,4 +11,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red">#FF1100</color>
+
+    <color name="ucrop_color_toolbar">@color/primary</color>
+    <color name="ucrop_color_statusbar">@color/primary</color>
+    <color name="ucrop_color_widget_active">@color/primary</color>
+
 </resources>

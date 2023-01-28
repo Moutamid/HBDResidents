@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -29,6 +30,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+import com.moutamid.hbdresidents.AboutUsActivity;
 import com.moutamid.hbdresidents.EditProfileActivity;
 import com.moutamid.hbdresidents.MapsActivity;
 import com.moutamid.hbdresidents.R;
@@ -53,6 +55,21 @@ public class MyAccountFragment extends Fragment {
 
         binding.editProfile.setOnClickListener(v -> {
             startActivity(new Intent(context, EditProfileActivity.class));
+        });
+
+        binding.aboutUs.setOnClickListener(v -> {
+            startActivity(new Intent(context, AboutUsActivity.class));
+        });
+
+        binding.developer.setOnClickListener(v -> {
+            try {
+                Intent i = new Intent();
+                i.setAction(Intent.ACTION_DIAL);
+                i.setData(Uri.parse("tel:123456789"));
+                startActivity(i);
+            } catch (Exception e){
+                Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
         });
 
         binding.logout.setOnClickListener(v-> {

@@ -1,12 +1,35 @@
 package com.moutamid.hbdresidents;
 
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.IntentSender;
+import android.content.ServiceConnection;
+import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.database.DatabaseErrorHandler;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.UserHandle;
+import android.view.Display;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -14,6 +37,13 @@ import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.moutamid.hbdresidents.databinding.ActivityEditProfileBinding;
 import com.moutamid.hbdresidents.models.UserModel;
 import com.moutamid.hbdresidents.utilis.Constants;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class EditProfileActivity extends AppCompatActivity {
     ActivityEditProfileBinding binding;
@@ -24,6 +54,11 @@ public class EditProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityEditProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        binding.back.setOnClickListener(v -> {
+            onBackPressed();
+            finish();
+        });
 
         Constants.databaseReference().child("users").child(Constants.auth().getCurrentUser().getUid())
                 .get().addOnSuccessListener(dataSnapshot -> {
