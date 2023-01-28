@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.ContentResolver;
@@ -44,16 +45,27 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class EditProfileActivity extends AppCompatActivity {
     ActivityEditProfileBinding binding;
     Uri image;
+    Date d;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityEditProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("Updating Your Profile...");
+        progressDialog.setCancelable(false);
+
+        d = new Date();
 
         binding.back.setOnClickListener(v -> {
             onBackPressed();
@@ -82,6 +94,51 @@ public class EditProfileActivity extends AppCompatActivity {
                     .start();
         });
 
+        binding.update.setOnClickListener(v -> {
+            progressDialog.show();
+            if (image!=null) {
+                uploadImage();
+            } else {
+                uploadData("");
+            }
+        });
+
+    }
+
+    private void uploadData(String image) {
+        Map<String, Object> map = new HashMap<>();
+        String dob = binding.date.getEditText().getText().toString() + "/" + binding.month.getEditText().getText().toString() + "/" + binding.year.getEditText().getText().toString();
+        map.put("name", binding.name.getEditText().getText().toString());
+        map.put("residentialArea", binding.residence.getEditText().getText().toString());
+        map.put("dob", dob);
+        map.put("image", image);
+
+        Constants.databaseReference().child("users").child(Constants.auth().getCurrentUser().getUid())
+                .updateChildren(map).addOnSuccessListener(unused -> {
+                    progressDialog.dismiss();
+                    onBackPressed();
+                    Toast.makeText(getApplicationContext(), "Profile Updated Successfully", Toast.LENGTH_SHORT).show();
+                    finish();
+                }).addOnFailureListener(e -> {
+                    progressDialog.dismiss();
+                    Toast.makeText(EditProfileActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    private void uploadImage() {
+        Constants.storageReference(Constants.auth().getCurrentUser().getUid())
+                .child("logo").child(Constants.auth().getCurrentUser().getUid() + d.getTime())
+                .putFile(image).addOnSuccessListener(taskSnapshot -> {
+                    taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(uri -> {
+                        uploadData(uri.toString());
+                    }).addOnFailureListener(e -> {
+                        progressDialog.dismiss();
+                        Toast.makeText(EditProfileActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    });
+                }).addOnFailureListener(e -> {
+                    progressDialog.dismiss();
+                    Toast.makeText(EditProfileActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
     }
 
     @Override
