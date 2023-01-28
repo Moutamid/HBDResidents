@@ -52,6 +52,7 @@ import java.util.Map;
 public class EditProfileActivity extends AppCompatActivity {
     ActivityEditProfileBinding binding;
     Uri image;
+    String url;
     Date d;
     ProgressDialog progressDialog;
 
@@ -81,6 +82,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     binding.date.getEditText().setText(dob[0]);
                     binding.month.getEditText().setText(dob[1]);
                     binding.year.getEditText().setText(dob[2]);
+                    url = userModel.getImage();
                     Glide.with(EditProfileActivity.this).load(userModel.getImage()).placeholder(R.drawable.profile_icon).into(binding.profileImage);
                 }).addOnFailureListener(e -> {
                     Toast.makeText(this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
@@ -99,7 +101,7 @@ public class EditProfileActivity extends AppCompatActivity {
             if (image!=null) {
                 uploadImage();
             } else {
-                uploadData("");
+                uploadData(url);
             }
         });
     }
