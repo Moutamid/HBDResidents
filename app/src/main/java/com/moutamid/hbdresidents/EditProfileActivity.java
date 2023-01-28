@@ -102,7 +102,6 @@ public class EditProfileActivity extends AppCompatActivity {
                 uploadData("");
             }
         });
-
     }
 
     private void uploadData(String image) {
