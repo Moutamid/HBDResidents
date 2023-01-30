@@ -25,7 +25,6 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.Comp
     @NonNull
     @Override
     public ComplaintVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // TODO: change Layout
         View view = LayoutInflater.from(context).inflate(R.layout.complaint_card, parent, false);
         return new ComplaintVH(view);
     }
