@@ -1,0 +1,33 @@
+package com.moutamid.hbdresidents.fragments;
+
+import android.content.Context;
+import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.moutamid.hbdresidents.R;
+import com.moutamid.hbdresidents.databinding.FragmentComplaintBinding;
+
+public class ComplaintFragment extends Fragment {
+    FragmentComplaintBinding binding;
+    Context context;
+
+    public ComplaintFragment() {
+        // Required empty public constructor
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentComplaintBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
+        context = view.getContext();
+
+
+
+        return view;
+    }
+}
