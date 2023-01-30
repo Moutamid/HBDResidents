@@ -4,11 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class ComplaintActivity extends AppCompatActivity {
+import com.moutamid.hbdresidents.databinding.ActivityComplaintBinding;
 
+public class ComplaintActivity extends AppCompatActivity {
+    ActivityComplaintBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_complaint);
+        binding = ActivityComplaintBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
     }
 }
