@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="8sp"
+    android:layout_marginStart="12sp"
+    android:layout_marginEnd="12sp"
+    android:layout_marginBottom="12sp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="12sp">
+
+
+
+    </RelativeLayout>
 
 </com.google.android.material.card.MaterialCardView>
