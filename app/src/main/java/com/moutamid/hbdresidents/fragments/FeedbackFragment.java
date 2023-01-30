@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,6 +40,9 @@ public class FeedbackFragment extends Fragment {
         context = view.getContext();
 
         list = new ArrayList<>();
+
+        binding.recycler.setHasFixedSize(false);
+        binding.recycler.setLayoutManager(new LinearLayoutManager(context));
 
         Constants.databaseReference().child("complaints").child(Constants.auth().getCurrentUser().getUid())
                 .addValueEventListener(new ValueEventListener() {
