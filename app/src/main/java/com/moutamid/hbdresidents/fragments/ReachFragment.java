@@ -1,6 +1,8 @@
 package com.moutamid.hbdresidents.fragments;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,7 +10,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.moutamid.hbdresidents.ComplaintActivity;
 import com.moutamid.hbdresidents.R;
 import com.moutamid.hbdresidents.databinding.FragmentReachBinding;
 
@@ -25,6 +29,44 @@ public class ReachFragment extends Fragment {
         binding = FragmentReachBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         context = view.getContext();
+
+        binding.damaged.setOnClickListener(v -> {
+            try {
+                Intent i = new Intent();
+                i.setAction(Intent.ACTION_DIAL);
+                i.setData(Uri.parse("tel:123456789"));
+                startActivity(i);
+            } catch (Exception e){
+                Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        binding.littering.setOnClickListener(v -> {
+            try {
+                Intent i = new Intent();
+                i.setAction(Intent.ACTION_DIAL);
+                i.setData(Uri.parse("tel:123456789"));
+                startActivity(i);
+            } catch (Exception e){
+                Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        binding.complaint.setOnClickListener(v -> {
+            Intent i = new Intent(context, ComplaintActivity.class);
+            i.putExtra("type", "COMP");
+            startActivity(i);
+        });
+        binding.noiseComplaint.setOnClickListener(v -> {
+            Intent i = new Intent(context, ComplaintActivity.class);
+            i.putExtra("type", "COMP");
+            startActivity(i);
+        });
+        binding.feedback.setOnClickListener(v -> {
+            Intent i = new Intent(context, ComplaintActivity.class);
+            i.putExtra("type", "FEED");
+            startActivity(i);
+        });
 
         return view;
     }

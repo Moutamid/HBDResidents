@@ -37,6 +37,7 @@
                 android:gravity="center">
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/damaged"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:cardBackgroundColor="@color/white"
@@ -72,6 +73,7 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/littering"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:cardBackgroundColor="@color/white"
@@ -119,6 +121,7 @@
                 android:gravity="center">
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/noiseComplaint"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:cardBackgroundColor="@color/white"
@@ -154,6 +157,7 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/complaint"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:cardBackgroundColor="@color/white"
@@ -201,6 +205,7 @@
                 android:gravity="center">
 
                 <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/feedback"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:cardBackgroundColor="@color/white"
