@@ -4,10 +4,11 @@ public class ComplaintModel {
     String id, userID, title, description, type, image;
     long timestamp;
     boolean urgent;
+    String status;
 
     public ComplaintModel() {}
 
-    public ComplaintModel(String id, String userID, String title, String description, String type, String image, long timestamp, boolean urgent) {
+    public ComplaintModel(String id, String userID, String title, String description, String type, String image, long timestamp, boolean urgent, String status) {
         this.id = id;
         this.userID = userID;
         this.title = title;
@@ -16,6 +17,7 @@ public class ComplaintModel {
         this.image = image;
         this.timestamp = timestamp;
         this.urgent = urgent;
+        this.status = status;
     }
 
     public String getId() {
@@ -80,5 +82,13 @@ public class ComplaintModel {
 
     public void setUrgent(boolean urgent) {
         this.urgent = urgent;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

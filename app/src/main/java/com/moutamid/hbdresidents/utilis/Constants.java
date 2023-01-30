@@ -17,7 +17,6 @@ public class Constants {
         db.keepSynced(true);
         return db;
     }
-
     public static StorageReference storageReference(String auth){
         return FirebaseStorage.getInstance().getReference().child("HBD_Residents").child(auth);
     }
