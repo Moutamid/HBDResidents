@@ -38,6 +38,8 @@ public class FeedbackFragment extends Fragment {
         View view = binding.getRoot();
         context = view.getContext();
 
+        list = new ArrayList<>();
+
         Constants.databaseReference().child("complaints").child(Constants.auth().getCurrentUser().getUid())
                 .addValueEventListener(new ValueEventListener() {
                     @Override
