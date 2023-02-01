@@ -54,6 +54,11 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.Comp
             holder.statusCard.setCardBackgroundColor(context.getResources().getColor(R.color.primary));
         }
 
+        if (model.getType().equals("FEED")){
+            holder.status.setTextColor(context.getResources().getColor(R.color.white));
+            holder.statusCard.setCardBackgroundColor(context.getResources().getColor(R.color.white));
+        }
+
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm aa");
         String date = dateFormat.format(model.getTimestamp());
