@@ -15,6 +15,7 @@ import com.moutamid.hbdresidents.models.ComplaintModel;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.ComplaintVH> {
     Context context;
@@ -38,19 +39,26 @@ public class ComplaintAdapter extends RecyclerView.Adapter<ComplaintAdapter.Comp
 
         holder.title.setText(model.getTitle());
         holder.desc.setText(model.getDescription());
+
         if (model.getStatus().equals("PEN")){
             holder.status.setText("Pending");
             holder.status.setTextColor(context.getResources().getColor(R.color.white));
             holder.statusCard.setCardBackgroundColor(context.getResources().getColor(R.color.dark));
+        } else if (model.getStatus().equals("INP")){
+            holder.status.setText("In-Progress");
+            holder.status.setTextColor(context.getResources().getColor(R.color.white));
+            holder.statusCard.setCardBackgroundColor(context.getResources().getColor(R.color.yellow));
         } else {
-            holder.status.setText("Completed");
+            holder.status.setText("Resolved");
             holder.status.setTextColor(context.getResources().getColor(R.color.white));
             holder.statusCard.setCardBackgroundColor(context.getResources().getColor(R.color.primary));
         }
 
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        String date = format.format(model.getTimestamp());
-        holder.date.setText(date);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm aa");
+        String date = dateFormat.format(model.getTimestamp());
+        String time = timeFormat.format(model.getTimestamp());
+        holder.date.setText(date + ", " + time.toUpperCase(Locale.ROOT));
 
     }
 

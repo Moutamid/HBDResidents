@@ -6,7 +6,8 @@
     app:cardElevation="8sp"
     android:layout_marginStart="12sp"
     android:layout_marginEnd="12sp"
-    android:layout_marginBottom="12sp">
+    android:layout_marginTop="6dp"
+    android:layout_marginBottom="6sp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -29,6 +30,7 @@
                 android:gravity="center"
                 android:padding="12sp"
                 android:text="Pending"
+                android:textStyle="bold"
                 android:fontFamily="@font/poppins"
                 android:textColor="@color/white" />
 
@@ -42,7 +44,10 @@
             android:textSize="20sp"
             android:layout_marginEnd="12sp"
             android:textStyle="bold"
+            android:layout_above="@id/desc"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:gravity="center_vertical"
             android:layout_toLeftOf="@id/status"
             android:fontFamily="@font/poppins"
             android:textColor="@color/black" />
@@ -63,10 +68,9 @@
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="22/02/2022"
+            android:text="22/02/2022, 05:15 AM"
             android:textSize="13sp"
             android:layout_marginTop="12sp"
-            android:layout_alignParentRight="true"
             android:layout_below="@id/desc"
             android:fontFamily="@font/poppins" />
 
