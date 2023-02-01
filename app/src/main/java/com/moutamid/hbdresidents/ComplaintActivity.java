@@ -57,10 +57,14 @@ public class ComplaintActivity extends AppCompatActivity {
         }
 
         binding.urgent.setOnClickListener(v -> {
-            Intent i = new Intent(this, ChatActivity.class);
-            i.putExtra("title", binding.title.getEditText().getText().toString());
-            i.putExtra("desc", binding.desc.getEditText().getText().toString());
-            startActivity(i);
+            if (validate()) {
+                progressDialog.show();
+                if (imageURI != null) {
+                    uploadImageUrgent(true);
+                } else {
+                    uploadComplaintUrgent("", true);
+                }
+            }
         });
 
         binding.back.setOnClickListener(v -> {
@@ -86,6 +90,48 @@ public class ComplaintActivity extends AppCompatActivity {
                 getImageFromGallery();
             }
         });
+    }
+
+    private void uploadComplaintUrgent(String image, boolean urgent) {
+        String uid = UUID.randomUUID().toString();
+        ComplaintModel complaint = new ComplaintModel(
+                uid,
+                Constants.auth().getCurrentUser().getUid(),
+                binding.title.getEditText().getText().toString(),
+                binding.desc.getEditText().getText().toString(),
+                type,
+                image,
+                d.getTime(),
+                urgent,
+                "PEN"
+        );
+        Constants.databaseReference().child("complaints").child(Constants.auth().getCurrentUser().getUid())
+                .child(uid)
+                .setValue(complaint).addOnSuccessListener(unused -> {
+                    progressDialog.dismiss();
+                    Intent i = new Intent(ComplaintActivity.this, ChatActivity.class);
+                    i.putExtra("ID", uid);
+                    finish();
+                }).addOnFailureListener(e -> {
+                    progressDialog.dismiss();
+                    Toast.makeText(ComplaintActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    private void uploadImageUrgent(boolean urgent) {
+        Constants.storageReference(Constants.auth().getCurrentUser().getUid())
+                .child("complaints").child(Constants.auth().getCurrentUser().getUid() + d.getTime())
+                .putFile(imageURI).addOnSuccessListener(taskSnapshot -> {
+                    taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(uri -> {
+                        uploadComplaintUrgent(uri.toString(), urgent);
+                    }).addOnFailureListener(e -> {
+                        progressDialog.dismiss();
+                        Toast.makeText(ComplaintActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    });
+                }).addOnFailureListener(e -> {
+                    progressDialog.dismiss();
+                    Toast.makeText(ComplaintActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
     }
 
     private boolean validate() {

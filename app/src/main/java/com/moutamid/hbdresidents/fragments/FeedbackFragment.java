@@ -22,6 +22,8 @@ import com.moutamid.hbdresidents.models.ComplaintModel;
 import com.moutamid.hbdresidents.utilis.Constants;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class FeedbackFragment extends Fragment {
     FragmentFeedbackBinding binding;
@@ -55,6 +57,8 @@ public class FeedbackFragment extends Fragment {
                                 list.add(model);
                             }
                         }
+                        Collections.sort(list, Comparator.comparing(ComplaintModel::getTimestamp));
+                        //Collections.reverse(list);
                         adapter = new ComplaintAdapter(context, list);
                         binding.recycler.setAdapter(adapter);
                     }
