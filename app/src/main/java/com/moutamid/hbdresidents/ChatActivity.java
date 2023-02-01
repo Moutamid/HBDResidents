@@ -117,7 +117,6 @@ public class ChatActivity extends AppCompatActivity {
         });
 
     }
-
     private void ReciverSide() {
         String msg = binding.message.getText().toString();
         date = new Date();
