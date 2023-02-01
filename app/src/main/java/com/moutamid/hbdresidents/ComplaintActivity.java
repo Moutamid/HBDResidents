@@ -111,6 +111,8 @@ public class ComplaintActivity extends AppCompatActivity {
                     progressDialog.dismiss();
                     Intent i = new Intent(ComplaintActivity.this, ChatActivity.class);
                     i.putExtra("ID", uid);
+                    i.putExtra("message", binding.desc.getEditText().getText().toString());
+                    startActivity(i);
                     finish();
                 }).addOnFailureListener(e -> {
                     progressDialog.dismiss();
