@@ -76,9 +76,9 @@ public class HomeFragment extends Fragment {
         binding.newsRC.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.newsRC.setHasFixedSize(false);
 
-        BarData data = createChartData();
+        /*BarData data = createChartData();
         configureChartAppearance();
-        prepareChartData(data);
+        prepareChartData(data);*/
 
         Constants.databaseReference().child("users").child(Constants.auth().getCurrentUser().getUid())
                 .addValueEventListener(new ValueEventListener() {
@@ -94,7 +94,8 @@ public class HomeFragment extends Fragment {
                     }
                 });
 
-        // showBarChart();
+        showPsiChart();
+        showDenguChart();
 
         getNews();
 
@@ -182,10 +183,10 @@ public class HomeFragment extends Fragment {
         requestQueue.add(jsonObjectRequest);
     }
 
-    private void showBarChart() {
+    private void showPsiChart() {
         ArrayList<Double> valueList = new ArrayList<>();
         ArrayList<BarEntry> entries = new ArrayList<>();
-        String title = "Title";
+        String title = "PSI Level";
 
         //input data
         for (int i = 0; i < 6; i++) {
@@ -204,8 +205,31 @@ public class HomeFragment extends Fragment {
 
         BarData data = new BarData(barDataSet);
         binding.psiChart.setData(data);
-        binding.dengueChart.setData(data);
         binding.psiChart.invalidate();
+    }
+
+    private void showDenguChart() {
+        ArrayList<Double> valueList = new ArrayList<>();
+        ArrayList<BarEntry> entries = new ArrayList<>();
+        String title = "Dengue Level";
+
+        //input data
+        for (int i = 0; i < 6; i++) {
+            valueList.add(i * 100.1);
+        }
+
+        //fit the data into a bar
+        for (int i = 0; i < valueList.size(); i++) {
+            BarEntry barEntry = new BarEntry(i, valueList.get(i).floatValue());
+            entries.add(barEntry);
+        }
+
+        Collections.shuffle(entries);
+
+        BarDataSet barDataSet = new BarDataSet(entries, title);
+
+        BarData data = new BarData(barDataSet);
+        binding.dengueChart.setData(data);
         binding.dengueChart.invalidate();
     }
 
