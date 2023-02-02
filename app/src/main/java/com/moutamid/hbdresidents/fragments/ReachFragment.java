@@ -12,7 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.fxn.stash.Stash;
+import com.moutamid.hbdresidents.ChatActivity;
 import com.moutamid.hbdresidents.ComplaintActivity;
+import com.moutamid.hbdresidents.MyNeighborhoodActivity;
 import com.moutamid.hbdresidents.R;
 import com.moutamid.hbdresidents.databinding.FragmentReachBinding;
 
@@ -38,6 +41,16 @@ public class ReachFragment extends Fragment {
                 startActivity(i);
             } catch (Exception e){
                 Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        binding.chat.setOnClickListener(v -> {
+            String uid = Stash.getString("uid");
+            if (uid.isEmpty()){
+                Toast.makeText(context, "You Don't Have urgent Chat", Toast.LENGTH_SHORT).show();
+            } else {
+                Intent i = new Intent(context, ChatActivity.class);
+                startActivity(i);
             }
         });
 

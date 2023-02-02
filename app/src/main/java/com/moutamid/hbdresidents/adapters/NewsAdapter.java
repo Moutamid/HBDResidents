@@ -1,6 +1,7 @@
 package com.moutamid.hbdresidents.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.moutamid.hbdresidents.NewsWebActivity;
 import com.moutamid.hbdresidents.R;
 import com.moutamid.hbdresidents.models.NewsModel;
 
@@ -53,6 +55,14 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsVH> {
             String d = dateFormat.format(date);
             holder.date.setText(d);
         }
+
+        holder.itemView.setOnClickListener(view -> {
+            Intent i = new Intent(context, NewsWebActivity.class);
+            i.putExtra("url", newsModel.getUrl());
+            i.putExtra("title", newsModel.getName());
+            context.startActivity(i);
+        });
+
     }
 
     @Override

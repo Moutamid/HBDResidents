@@ -3,12 +3,15 @@ package com.moutamid.hbdresidents;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
+import com.fxn.stash.Stash;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,7 +29,7 @@ import java.util.Date;
 public class ChatActivity extends AppCompatActivity {
     ActivityChatBinding binding;
     Date date;
-    String ID, message;
+    String ID, message, title;
     SimpleDateFormat format;
     ChatAdapter adapterChat;
     ArrayList<ChatModel> chatList;
@@ -37,16 +40,32 @@ public class ChatActivity extends AppCompatActivity {
         binding = ActivityChatBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        ID = getIntent().getStringExtra("ID");
-        message = getIntent().getStringExtra("message");
         format = new SimpleDateFormat("HH:mm aa");
 
         chatList = new ArrayList<>();
+
+        ID = Stash.getString("uid");
+        message = Stash.getString("message");
+        title = Stash.getString("title");
 
         binding.message.setText(message);
 
         binding.recycler.setLayoutManager(new LinearLayoutManager(this));
         binding.recycler.setHasFixedSize(false);
+
+        binding.back.setOnClickListener(v -> {
+            new AlertDialog.Builder(this)
+                    .setMessage("If you leave the chat you can't enter this chat for complaint about "+ title)
+                    .setTitle("Attention")
+                    .setPositiveButton("Ok", (dialogInterface, i) -> {
+                        dialogInterface.dismiss();
+                        Stash.clear("uid");
+                        startActivity(new Intent(this, MyNeighborhoodActivity.class));
+                        finish();
+                    }).setNegativeButton("No", (dialogInterface, i) -> {
+                        dialogInterface.dismiss();
+                    }).show();
+        });
 
         Constants.databaseReference().child("chats").child(Constants.auth().getCurrentUser().getUid())
                 .child("69WQh6r25yMtjdPUnWUmBbYrbsV2")
@@ -135,5 +154,20 @@ public class ChatActivity extends AppCompatActivity {
                 }).addOnFailureListener(e -> {
 
                 });
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setMessage("If you leave the chat you can't enter this chat for complaint about "+ title)
+                .setTitle("Attention")
+                .setPositiveButton("Ok", (dialogInterface, i) -> {
+                    dialogInterface.dismiss();
+                    Stash.clear("uid");
+                    startActivity(new Intent(this, MyNeighborhoodActivity.class));
+                    finish();
+                }).setNegativeButton("No", (dialogInterface, i) -> {
+                    dialogInterface.dismiss();
+                }).show();
     }
 }

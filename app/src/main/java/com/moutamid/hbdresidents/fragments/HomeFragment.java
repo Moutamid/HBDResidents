@@ -20,9 +20,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.bumptech.glide.Glide;
 import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -40,6 +43,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
 
 public class HomeFragment extends Fragment {
     FragmentHomeBinding binding;
@@ -47,6 +52,12 @@ public class HomeFragment extends Fragment {
     RequestQueue requestQueue;
     ArrayList<NewsModel> newsList;
     NewsAdapter adapter;
+
+    private static final int MAX_X_VALUE = 12;
+    private static final int MAX_Y_VALUE = 50;
+    private static final int MIN_Y_VALUE = 5;
+    private static final String SET_LABEL = "PSI Levels";
+    private static final String[] DAYS = { "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC" };
 
     public HomeFragment() {
         // Required empty public constructor
@@ -65,6 +76,10 @@ public class HomeFragment extends Fragment {
         binding.newsRC.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.newsRC.setHasFixedSize(false);
 
+        BarData data = createChartData();
+        configureChartAppearance();
+        prepareChartData(data);
+
         Constants.databaseReference().child("users").child(Constants.auth().getCurrentUser().getUid())
                 .addValueEventListener(new ValueEventListener() {
                     @Override
@@ -79,11 +94,57 @@ public class HomeFragment extends Fragment {
                     }
                 });
 
-        showBarChart();
+        // showBarChart();
 
         getNews();
 
         return view;
+    }
+
+    private void configureChartAppearance() {
+        binding.psiChart.getDescription().setEnabled(false);
+        binding.psiChart.setDrawValueAboveBar(false);
+
+        XAxis xAxis = binding.psiChart.getXAxis();
+        xAxis.setValueFormatter(new ValueFormatter() {
+            @Override
+            public String getFormattedValue(float value) {
+                return DAYS[(int) value];
+            }
+        });
+
+        YAxis axisLeft = binding.psiChart.getAxisLeft();
+        axisLeft.setGranularity(10f);
+        axisLeft.setAxisMinimum(0);
+
+        YAxis axisRight = binding.psiChart.getAxisRight();
+        axisRight.setGranularity(10f);
+        axisRight.setAxisMinimum(0);
+    }
+
+    private BarData createChartData() {
+        ArrayList<BarEntry> values = new ArrayList<>();
+        for (int i = 0; i < MAX_X_VALUE; i++) {
+            float x = i;
+            Random r = new Random();
+            float y = MIN_Y_VALUE + r.nextFloat() * (MIN_Y_VALUE - MAX_Y_VALUE);
+            values.add(new BarEntry(x, y));
+        }
+
+        BarDataSet set1 = new BarDataSet(values, SET_LABEL);
+
+        ArrayList<IBarDataSet> dataSets = new ArrayList<>();
+        dataSets.add(set1);
+
+        BarData data = new BarData(dataSets);
+
+        return data;
+    }
+
+    private void prepareChartData(BarData data) {
+        data.setValueTextSize(12f);
+        binding.psiChart.setData(data);
+        binding.psiChart.invalidate();
     }
 
     private void getNews() {
@@ -122,7 +183,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void showBarChart() {
-        ArrayList<Double> valueList = new ArrayList<Double>();
+        ArrayList<Double> valueList = new ArrayList<>();
         ArrayList<BarEntry> entries = new ArrayList<>();
         String title = "Title";
 
@@ -136,6 +197,8 @@ public class HomeFragment extends Fragment {
             BarEntry barEntry = new BarEntry(i, valueList.get(i).floatValue());
             entries.add(barEntry);
         }
+
+        Collections.shuffle(entries);
 
         BarDataSet barDataSet = new BarDataSet(entries, title);
 
