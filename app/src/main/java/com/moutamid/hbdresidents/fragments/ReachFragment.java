@@ -34,14 +34,9 @@ public class ReachFragment extends Fragment {
         context = view.getContext();
 
         binding.damaged.setOnClickListener(v -> {
-            try {
-                Intent i = new Intent();
-                i.setAction(Intent.ACTION_DIAL);
-                i.setData(Uri.parse("tel:123456789"));
-                startActivity(i);
-            } catch (Exception e){
-                Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
+            Intent i = new Intent(context, ComplaintActivity.class);
+            i.putExtra("type", "FEED");
+            startActivity(i);
         });
 
         binding.chat.setOnClickListener(v -> {
@@ -55,14 +50,17 @@ public class ReachFragment extends Fragment {
         });
 
         binding.littering.setOnClickListener(v -> {
-            try {
+            /*try {
                 Intent i = new Intent();
                 i.setAction(Intent.ACTION_DIAL);
                 i.setData(Uri.parse("tel:123456789"));
                 startActivity(i);
             } catch (Exception e){
                 Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
+            }*/
+            Intent i = new Intent(context, ComplaintActivity.class);
+            i.putExtra("type", "FEED");
+            startActivity(i);
         });
 
         binding.complaint.setOnClickListener(v -> {

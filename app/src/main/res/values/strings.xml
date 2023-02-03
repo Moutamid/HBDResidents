@@ -1,8 +1,9 @@
 <resources>
-    <string name="app_name">HBD Residents</string>
+    <string name="app_name">My Neighbourhood</string>
     <string name="login">Already Have an Account? <font color="#38B6FF"><b>Login</b></font></string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="about_us">This app improves the communication barrier between residences and the town council in that area. We hope this app is able to provide the perfect user experience, allowing users to reside comfortably in their community.</string>
     <string name="loremShort">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis culpa quaerat quos, ratione recusandae unde.</string>
     <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur culpa, deleniti esse, explicabo harum impedit ipsam itaque iusto nam obcaecati quae quasi quia quo, quod sunt ut velit voluptatem. Consequuntur, dicta dolor doloremque doloribus eius enim fugiat magni minus nesciunt odio omnis quasi rerum sapiente. Error hic incidunt libero placeat quod! Architecto, consectetur impedit in magni possimus quo repellat repudiandae rerum sunt tempore. Blanditiis eum laudantium, minima odit sed vero. \n\n Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias aliquid, dolor dolore illum ipsam maxime, molestiae nihil optio quaerat, quia quos rerum sit velit veniam? \n\n Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid animi aspernatur commodi culpa, cum debitis dolore doloremque dolores dolorum ducimus eos esse eum excepturi explicabo id, illo iusto labore laborum modi mollitia nemo numquam officiis omnis porro possimus praesentium quisquam recusandae, sed ut velit voluptatem.</string>
 </resources>

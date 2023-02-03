@@ -57,12 +57,12 @@
             android:fontFamily="@font/sans"
             android:padding="15sp"
             android:textColor="@color/secondary"
-            android:text="Who We Are and What We Do?" />
+            android:text="What is the purpose of this APP?" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/lorem"
+            android:text="@string/about_us"
             android:textSize="18sp"
             android:fontFamily="@font/poppins"
             android:padding="15sp" />
